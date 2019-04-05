@@ -1,0 +1,44 @@
+{
+  "name": "user-tasks",
+  "version": "1.0.0",
+  "description": "Admin can set tasks to users and users can see their tasks",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node ./bin/www",
+    "test": "NODE_ENV=test nyc mocha --exit --timeout 20000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stopcharla/user-tasks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stopcharla/user-tasks/issues"
+  },
+  "homepage": "https://github.com/stopcharla/user-tasks#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.5",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "~1.9.0",
+    "mysql2": "^1.6.5",
+    "nodemon": "^1.18.10",
+    "sequelize": "^5.2.3",
+    "swagger-ui-express": "^4.0.2",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^5.15.3",
+    "mocha": "^6.0.2",
+    "nyc": "^13.3.0",
+    "sinon": "^7.3.1",
+    "supertest": "^4.0.2"
+  }
+}
