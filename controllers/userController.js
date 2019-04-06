@@ -24,7 +24,7 @@ const getAllUsersInfo = async (req, res) => {
     try{
         const usersInfo = await userService.getAllUsers(req.emailId, page, per_page)
         const responseJSON = { pageNumber: page, userCount: usersInfo.length, users: usersInfo }
-        res.status(200).send({response:responseJSON});
+        res.status(200).send(responseJSON);
     }catch(error){
         res.status(500).send({message:"internal server error"})
     }
