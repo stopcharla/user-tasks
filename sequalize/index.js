@@ -1,8 +1,9 @@
 const Sequelize = require('sequelize')
 const UserModel = require('./models/users')
 const userTasksModel = require('./models/userTasks')
+const config = require('../config')
 
-const sequelize = new Sequelize('ShiftPlan', 'root', 'root', {
+const sequelize = new Sequelize(config.dbConfig.dbName, config.dbConfig.username, config.dbConfig.password, {
   host: 'localhost',
   dialect: 'mysql',
   pool: {

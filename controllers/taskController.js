@@ -31,7 +31,7 @@ const addTask = async (req, res) => {
             res.status(400).send(error)
         }
     }else{
-        res.status(400).send({message:"username or password missing"})
+        res.status(400).send({message:"required fields missing"})
     } 
 }
 

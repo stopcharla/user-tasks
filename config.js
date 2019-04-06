@@ -3,7 +3,9 @@ module.exports = {
     defaultPageNumber : 0,
     jwtTTL: 60*60,
     dbConfig: {
-        dbURl: "mongodb://localhost/ophigo-users"
+        dbName: "shyftplan",
+        username: "root",
+        password: "root"
     },
     serverKeys: {
         secret : "abcdefuyio098655gnnmbg677"
