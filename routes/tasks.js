@@ -12,9 +12,9 @@ const authService = require('../services/authService')
  * @param {*} next 
  */
 const authMiddleWare = async (req, res, next) => {
-    req.emailId = 'middleware@middleware.com'
-    next()
-    return
+    // req.emailId = 'middleware@middleware.com'
+    // next()
+    // return
   console.log("Auth middleware")
   const bearerToken = req.headers['authorization'];
   if( typeof bearerToken !== 'undefined'){

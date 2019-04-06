@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/', indexRouter);
 app.use('/v1', usersRouter);
-app.use('/v1/users', taskRoute);
+app.use('/v1/user', taskRoute);
 
 
 

@@ -2,10 +2,11 @@ const utils = require('../utils/utils');
 const taskService = require('../services/taskService');
 
 const getUserTasks = async (req, res) => {
-    if(utils.validateObject(req.query, ['date', "email"])){
+    if(utils.validateObject(req.query, ['date'])){
         try{
             console.log('getting tasks for user')
-            const tasks = await taskService.getUserTasksForDay(req.query.email, req.query.date)
+            const emailId = req.query.emailId || req.emailId;
+            const tasks = await taskService.getUserTasksForDay(emailId, req.query.date)
             res.status(200).send({date:req.query.date, tasks: tasks})
         } catch (error) {
             console.error("error:",error)
@@ -18,9 +19,9 @@ const getUserTasks = async (req, res) => {
 
 const addTask = async (req, res) => {
     console.log('add task:', req.body)
-    if(utils.validateObject(req.body, ['start', 'end', 'description', 'assigneeEmailId'])){
+    if(utils.validateObject(req.body, ['start', 'end', 'description', 'assigneeMailId'])){
         try{
-            const assigneeEmailId = req.body.assigneeEmailId;
+            const assigneeEmailId = req.body.assigneeMailId;
             req.body.assignedBy = req.emailId
             delete req.body.assigneeEmailId;
             await taskService.addTask(req.body,assigneeEmailId)

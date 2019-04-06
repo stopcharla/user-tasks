@@ -182,6 +182,166 @@
                     }
                 }
             }
-        }        
+        },
+        "/user/addTask":{
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary":"add task to a user",
+                "parameters":[
+                    {   "name":"task details",
+                        "in":"body",
+                        "description":"details of the task to be added to user",
+                        "type":"object",
+                        "schema":{
+                            "required":["emailId", "start", "end"],
+                            "properties":{
+                                "assigneeMailId":{
+                                    "type":"string"
+                                },
+                                "start":{
+                                    "type":"string",
+                                    "description":"2017-11-03 11:00:00.000 +00:00"
+                                },
+                                "end":{
+                                    "type":"string",
+                                    "description":"2017-11-03 12:00:00.000 +00:00"
+                                },
+                                "description":{
+                                    "type":"string",
+                                    "description":"task description"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name":"authorization",
+                        "in":"header",
+                        "description":"Bearer Token",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "description": "Returns a list of users.",
+                "responses": {
+                    "200": {
+                        "description": "List of users",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message":{
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    },
+                    "403":{
+                        "description": "unauthorised",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message":{
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "request error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message":{
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/tasks":{
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Gets all users registered",
+                "parameters": [
+                    {
+                        "name" : "per_page",
+                        "in": "query",
+                        "description":"Specify the number that need to be considered for per page if no value is specified a default value of 100 is considered",
+                        "required":false,
+                        "type":"number"
+                    },
+                    {
+                        "name" : "page",
+                        "in": "query",
+                        "description":"Specify the page number that need to be considered, if no value is specified then first page is considered",
+                        "required":false,
+                        "type":"number"
+                    },
+                    {
+                        "name" : "emailId",
+                        "in": "query",
+                        "description":"the emailId of user you want to view the tasks for, to obtain current users tasks leave this field blank",
+                        "required":false,
+                        "type":"string"
+                    },
+                    {
+                        "name" : "date",
+                        "in": "query",
+                        "description":"all the tasks of user for a specified day i.e. 2017-11-03",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"authorization",
+                        "in":"header",
+                        "description":"Bearer Token",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "description": "Returns a list of users.",
+                "responses": {
+                    "200": {
+                        "description": "List of tasks",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "date": {
+                                    "type": "string"
+                                },
+                                "tasks": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {"type": "string"},
+                                            "description":{"type":"string"},
+                                            "start":{"type":"string"},
+                                            "end":{"type":"string"}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403":{
+                        "description": "List of errors",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message":{
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }       
     }
 }
