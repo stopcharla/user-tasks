@@ -16,8 +16,8 @@ describe('Testing the signup function in user controller', () => {
     it('not sending username as a part of query parameters', async () => {
         const req = {
             body: {
-                name: 'ophigo',
-                emailId:"firstuser@ophigo.com"
+                name: 'shyft plan',
+                emailId:"firstuser@shyftplan.com"
             }
         }
         const res = {
@@ -38,9 +38,9 @@ describe('Testing the signup function in user controller', () => {
     it('adding the user with throwing error', async () => {
         const req = {
             body: {
-                name: 'ophigo',
-                emailId:`firstuser-${new Date()}@ophigo.com`,
-                password: 'ophigo123'
+                name: 'shyftplan',
+                emailId:`shyftplan-${new Date()}@shyftplan.com`,
+                password: 'shyftplan123'
             }
         }
         const res = {
@@ -63,9 +63,9 @@ describe('Testing the signup function in user controller', () => {
     it('adding the user with correct details', async () => {
         const req = {
             body: {
-                name: 'ophigo',
-                emailId:`firstuser-${new Date()}@ophigo.com`,
-                password: 'ophigo123'
+                name: 'shyftplan',
+                emailId:`firstuser-${new Date()}@shyftplan.com`,
+                password: 'shyftplan123'
             }
         }
         const res = {
@@ -88,7 +88,7 @@ describe('Testing the signup function in user controller', () => {
     it('verifying the login api without providing required details', async () => {
         const req = {
             body: {
-                emailId:"firstuser@ophigo.com"
+                emailId:"firstuser@shyftplan.com"
             }
         }
         const res = {
@@ -109,8 +109,8 @@ describe('Testing the signup function in user controller', () => {
     it('verifying the login api with invalid credentials', async () => {
         const req = {
             body: {
-                password: "ophigo123",
-                emailId:"firstuser@ophigo.com"
+                password: "shyftplan123",
+                emailId:"firstuser@shyftplan.com"
             }
         }
         const res = {
@@ -133,8 +133,8 @@ describe('Testing the signup function in user controller', () => {
     it('verifying the login api with throwing error from get user data', async () => {
         const req = {
             body: {
-                password: "ophigo123",
-                emailId:"firstuser@ophigo.com"
+                password: "shyftplan123",
+                emailId:"firstuser@shyftplan.com"
             }
         }
         const res = {
@@ -157,8 +157,8 @@ describe('Testing the signup function in user controller', () => {
         const expectedAuthToken = "tokensample2345"
         const req = {
             body: {
-                password: "ophigo123",
-                emailId:"firstuser@ophigo.com"
+                password: "shyftplan123",
+                emailId:"firstuser@shyftplan.com"
             }
         }
         const res = {
@@ -174,7 +174,7 @@ describe('Testing the signup function in user controller', () => {
         }
         
         sinon.stub(utils, 'validateObject').returns(true);
-        sinon.stub(userService, 'getUserInfo').returns(Promise.resolve([{emailId:"abcd",password:"abcd123"}]))
+        sinon.stub(userService, 'getUserInfo').returns(Promise.resolve({dataValues:{emailId:"abcd",password:"abcd123"}}))
         sinon.stub(cryptoService,'compare').returns(Promise.resolve(true))
         sinon.stub(authService, 'createAuthToken').returns(Promise.resolve(expectedAuthToken))
         await userController.login(req, res);
@@ -200,7 +200,7 @@ describe('Testing the signup function in user controller', () => {
 
     it('verifying the get all users api  providing all details expected to be success', async () => {
         const usersInfo = [{emailId:"email@emailId.com", name:"emailID"}, {emailId:"newmail@emaild.com", name: "neawmail"}];
-        const expectedResponse = {response:{pageNumber: 0, userCount: usersInfo.length, users: usersInfo }}
+        const expectedResponse = {pageNumber: 0, userCount: usersInfo.length, users: usersInfo }
         const req = {
             emailId: "mailId@mailId.com",
             query:{}

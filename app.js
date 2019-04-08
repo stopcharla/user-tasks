@@ -12,6 +12,7 @@ const swaggerDocument = require('./swagger.json');
 
 const sql = require('./sql-connector')
 sql.connect().then(() => {
+    console.log('checking if database exists')
     require('./sequalize')
 }).catch((err) => {
     console.error("error occurred:", err)

@@ -31,7 +31,7 @@ const addUser = async (userInfo) => {
  * @param {*} emailId 
  */
 const getUserInfo = async (emailId) => {
-    console.log('get user info')
+    console.log('get user info:', emailId)
     const res = await User.findOne({where:{emailId : emailId}});
     return res;
 }

@@ -192,7 +192,7 @@
                 "parameters":[
                     {   "name":"task details",
                         "in":"body",
-                        "description":"details of the task to be added to user",
+                        "description":"details of the task to be added to user start: 2017-11-01 20:00:00.000 +00:00",
                         "type":"object",
                         "schema":{
                             "required":["emailId", "start", "end"],

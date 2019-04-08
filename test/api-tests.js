@@ -7,9 +7,9 @@ describe('testing all the rest apis', () => {
     it('signup api should return 400',  async () => {
         const now = (new Date()).getTime()
         const userDetails = {
-            name:"ophigo",
-            emailId: `ophigotest-${now}gmail.com`,
-            password: 'ophigo123'
+            name:"shyftplan",
+            emailId: `shyftplantest-${now}gmail.com`,
+            password: 'shyftplan123'
         }
         const response = await request(app).post("/v1/signup").send(userDetails);
         console.log('*******************:',response.status)
@@ -19,9 +19,9 @@ describe('testing all the rest apis', () => {
     it('signup api should return 200 and verifying login and get users as well', async () => {
         const now = (new Date()).getTime()
         const userDetails = {
-            name:"ophigo",
-            emailId: `ophigotest-${now}@gmail.com`,
-            password: 'ophigo123'
+            name:"shyftplan",
+            emailId: `shyftplantest-${now}@gmail.com`,
+            password: 'shyftplan123'
         }
         const response = await request(app).post("/v1/signup").send(userDetails);
         console.log(response.status)

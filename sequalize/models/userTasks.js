@@ -11,8 +11,8 @@ module.exports = (sequelize, type, tableName) => {
         },
         end:{
             type:type.DATE
-        },
-        assignedBy: type.STRING
+        }
+        // assignedBy: type.STRING
     });
     
     return userTaskTable;

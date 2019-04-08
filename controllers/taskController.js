@@ -1,5 +1,6 @@
 const utils = require('../utils/utils');
 const taskService = require('../services/taskService');
+const userService = require('../services/userService');
 
 const getUserTasks = async (req, res) => {
     if(utils.validateObject(req.query, ['date'])){
@@ -21,11 +22,17 @@ const addTask = async (req, res) => {
     console.log('add task:', req.body)
     if(utils.validateObject(req.body, ['start', 'end', 'description', 'assigneeMailId'])){
         try{
-            const assigneeEmailId = req.body.assigneeMailId;
-            req.body.assignedBy = req.emailId
-            delete req.body.assigneeEmailId;
-            await taskService.addTask(req.body,assigneeEmailId)
-            res.status(200).send({message:"task successfully added for user"})
+            const assignee = await userService.getUserInfo(req.body.assigneeMailId)
+            if(assignee && Object.keys(assignee.dataValues).length > 0){
+                const assigneeEmailId = req.body.assigneeMailId;
+                req.body.assignedBy = req.emailId
+                delete req.body.assigneeEmailId;
+                await taskService.addTask(req.body,assigneeEmailId)
+                res.status(200).send({message:"task successfully added for user"})
+            }else{
+                console.log("no user found")
+                res.status(400).send({message:"user not found"})
+            }
         } catch (error) {
             console.error("error:",error)
             res.status(400).send(error)

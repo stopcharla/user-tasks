@@ -45,8 +45,8 @@ const login = async (req, res) => {
         try{
             console.log('fetching from db:')
             const userInfo = await userService.getUserInfo(req.body.emailId.toLowerCase())
-            console.log("user ingo is",userInfo.dataValues);
-            if(Object.keys(userInfo.dataValues).length > 0){
+            console.log("user info is",userInfo.dataValues);
+            if(userInfo && Object.keys(userInfo.dataValues).length > 0){
                 console.log('before compare')
                 const comparePwd = await crypto.compare(req.body.password, userInfo.dataValues.password)
                 if(comparePwd){
