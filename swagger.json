@@ -192,10 +192,10 @@
                 "parameters":[
                     {   "name":"task details",
                         "in":"body",
-                        "description":"details of the task to be added to user start: 2017-11-01 20:00:00.000 +00:00",
+                        "description":"details of the task to be added to user. Please use the start and end date format be 2017-11-01 20:00:00.000 +00:00",
                         "type":"object",
                         "schema":{
-                            "required":["emailId", "start", "end"],
+                            "required":["assigneeMailId", "start", "end","description"],
                             "properties":{
                                 "assigneeMailId":{
                                     "type":"string"
@@ -285,8 +285,8 @@
                     {
                         "name" : "emailId",
                         "in": "query",
-                        "description":"the emailId of user you want to view the tasks for, to obtain current users tasks leave this field blank",
-                        "required":false,
+                        "description":"the emailId of user you want to view the tasks for the specific day",
+                        "required":true,
                         "type":"string"
                     },
                     {

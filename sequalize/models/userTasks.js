@@ -13,6 +13,8 @@ module.exports = (sequelize, type, tableName) => {
             type:type.DATE
         }
         // assignedBy: type.STRING
+    },{
+        tableName:tableName
     });
     
     return userTaskTable;

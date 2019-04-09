@@ -136,10 +136,12 @@ describe('Testing the signup function in user controller', () => {
                 };
             }
         }
+        sinon.stub(userService, 'getUserInfo').returns({dataValues:{emailId:"samplemailId@gmail.com"}})
         sinon.stub(utils, 'validateObject').returns(true);
         sinon.stub(taskService, 'getUserTasksForDay').returns(Promise.resolve(expectedResponse.tasks))
         await taskController.getUserTasks(req, res);
         taskService.getUserTasksForDay.restore()
+        userService.getUserInfo.restore()
     });
 
 

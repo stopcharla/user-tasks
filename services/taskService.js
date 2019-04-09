@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 const op = Sequelize.Op;
 
 const getUserTasksForDay = async (emailId , date) => {
-    console.log('getUserTasksForDay');
+    console.log('getUserTasksForDay:',emailId);
     const TaskTable = await sequalize.getTaskTableForUser(emailId);
     const time = new Date(date)
     const startDate = time.setHours(0,0,0);
@@ -24,6 +24,12 @@ const addTask = async (taskDetails, userEmailId) => {
             [op.or] :{ 
                 start:{[op.between]: [taskDetails.start, taskDetails.end]}, 
                 end:{[op.between]:[taskDetails.start, taskDetails.end]}
+            },
+            start: {
+                [op.ne]: taskDetails.end
+            },
+            end:{
+                [op.ne]:taskDetails.start
             }
         },
         raw:true
