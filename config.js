@@ -4,8 +4,8 @@ module.exports = {
     jwtTTL: 60*60,
     dbConfig: {
         dbName: "shyftplan",
-        username: "root",
-        password: "root"
+        username: "docker",
+        password: "docker"
     },
     serverKeys: {
         secret : "abcdefuyio098655gnnmbg677"

@@ -10,16 +10,6 @@ const taskRoute = require('./routes/tasks');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
-const sql = require('./sql-connector')
-sql.connect().then(() => {
-    console.log('checking if database exists')
-    require('./sequalize')
-}).catch((err) => {
-    console.error("error occurred:", err)
-})
-
-// require('./mongoose-connection')
-
 const app = express();
 
 app.use(logger('dev'));
