@@ -9,7 +9,7 @@ const taskRoute = require('./routes/tasks');
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
-
+require('./sql-connector')
 const app = express();
 
 app.use(logger('dev'));

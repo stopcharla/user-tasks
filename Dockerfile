@@ -1,8 +1,7 @@
-RUN sleep 60
 FROM node:8
-WORKDIR /shyftplan-users
-COPY package.json /shyftplan-users
+WORKDIR /shyftplan
+COPY package.json /shyftplan
 RUN npm install
-COPY . /shyftplan-users
+COPY . /shyftplan
 CMD npm start
 EXPOSE 8000

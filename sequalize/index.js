@@ -3,8 +3,13 @@ const UserModel = require('./models/users')
 const userTasksModel = require('./models/userTasks')
 const config = require('../config')
 
+
+/**
+ * 
+ */
+
 const sequelize = new Sequelize(config.dbConfig.dbName, config.dbConfig.username, config.dbConfig.password, {
-  host: 'localhost',
+  host:'db',
   dialect: 'mysql',
   port: 3306,
   pool: {
@@ -19,6 +24,9 @@ const User = UserModel(sequelize, Sequelize)
 sequelize.sync({ force: false }).then((res) => {
   console.log(`Database & tables created:`, res)
   // User.bulkCreate(Data)
+}).catch((err) => {
+  console.error("error occurred:",err)
+  process.exit(22)
 })
 
 

@@ -1,20 +1,25 @@
-version: "3"
-services:
-  shyftplan-users:
-    container_name: shyftplan-users
-    restart: always
-    build: .
-    ports:
-      - "8000:8000"
+version: '3'
 
-  mysql:
-    image: mysql:8.0.2
-    command: --default-authentication-plugin=mysql_native_password 
+services:
+  db:
+    build: ./db_service
     environment:
       MYSQL_DATABASE: shyftplan
-      MYSQL_USER: 'docker'
-      MYSQL_PASSWORD: 'docker'
       MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      DATABASE_HOST: db
+      
+  shyftplan:
+    build: .
+    environment:
+      DATABASE_HOST: db
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: shyftplan
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
     ports:
-      # <Port exposed> : < MySQL Port running inside container>
-      - '3306:3306'
+      - "8000:8000"
+    depends_on:
+      - db
+    restart: on-failure 
