@@ -18,18 +18,18 @@ const getAllUsers = async (currentUserEmail ,page, per_page) => {
 }
 
 /**
- * Adding new user to the db, fails if emailId already exists in the db else returs success
- * @param {*} userInfo 
- */
+* Adding new user to the db, fails if emailId already exists in the db else returs success
+* @param {*} userInfo 
+*/
 const addUser = async (userInfo) => {
     await User.create(userInfo);
     return;
 }
 
 /**
- * Fetches the userinfo for the provided emailID. Its not expected to have mutiple users. 
- * @param {*} emailId 
- */
+* Fetches the userinfo for the provided emailID. Its not expected to have mutiple users. 
+* @param {*} emailId 
+*/
 const getUserInfo = async (emailId) => {
     console.log('get user info:', emailId)
     const res = await User.findOne({where:{emailId : emailId}});

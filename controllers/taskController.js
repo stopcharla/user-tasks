@@ -12,15 +12,15 @@ const getUserTasks = async (req, res) => {
                 const tasks = await taskService.getUserTasksForDay(emailId, req.query.date)
                 res.status(200).send({date:req.query.date, tasks: tasks})
             }else{
-                console.log("no user found")
-                res.status(400).send({message:"user not found"})
+                console.log('no user found')
+                res.status(400).send({message:'user not found'})
             }
         } catch (error) {
-            console.error("error:",error)
+            console.error('error:',error)
             res.status(500).send(error)
         }
     }else{
-        res.status(400).send({message:"username or password missing"})
+        res.status(400).send({message:'username or password missing'})
     } 
 }
 
@@ -35,17 +35,17 @@ const addTask = async (req, res) => {
                 req.body.assignedBy = req.emailId
                 delete req.body.assigneeEmailId;
                 await taskService.addTask(req.body,assigneeEmailId)
-                res.status(200).send({message:"task successfully added for user"})
+                res.status(200).send({message:'task successfully added for user'})
             }else{
-                console.log("no user found")
-                res.status(400).send({message:"user not found"})
+                console.log('no user found')
+                res.status(400).send({message:'user not found'})
             }
         } catch (error) {
-            console.error("error:",error)
+            console.error('error:',error)
             res.status(400).send(error)
         }
     }else{
-        res.status(400).send({message:"required fields missing or error"})
+        res.status(400).send({message:'required fields missing or error'})
     } 
 }
 

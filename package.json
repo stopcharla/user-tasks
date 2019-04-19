@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node ./bin/www",
-    "test": "NODE_ENV=test nyc mocha --exit --timeout 20000"
+    "test": "NODE_ENV=test MYSQL_DATABASE=shyftplan MYSQL_USER=root MYSQL_PASSWORD=root DATABASE_HOST=localhost MYSQL_PORT=3306 nyc mocha --exit --timeout 20000"
   },
   "repository": {
     "type": "git",

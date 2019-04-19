@@ -1,9 +1,9 @@
 /**
- * Checks if the jsonObject contains all the required keys in the object
- * returns true if all keys are available else false
- * @param {object} jsonObject 
- * @param {Array} keys 
- */
+* Checks if the jsonObject contains all the required keys in the object
+* returns true if all keys are available else false
+* @param {object} jsonObject 
+* @param {Array} keys 
+*/
 
 const validateObject = (jsonObject, keys) => {
     let isVaild = true;

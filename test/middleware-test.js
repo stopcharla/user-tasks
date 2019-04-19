@@ -4,7 +4,7 @@ const middleware = require('../controllers/middleware')
 const authService = require('../services/authService')
 
 describe('validating the middleware functions', () => {
-
+    
     it('not sending valid bearer string', async () => {
         const req = {
             headers: {
@@ -24,7 +24,7 @@ describe('validating the middleware functions', () => {
         const next = () => {}
         await middleware.authMiddleWare(req, res, next);
     })
-
+    
     it('sending valid bearer string but token is not valid', async () => {
         const req = {
             headers: {
@@ -42,13 +42,13 @@ describe('validating the middleware functions', () => {
             }
         }
         const next = () => {}
-
+        
         sinon.stub(authService, 'validateAuthToken').returns(Promise.reject());
         // sinon.stub(userService, 'getUserInfo').returns(null)
         await middleware.authMiddleWare(req, res, next);
         await authService.validateAuthToken.restore()
     })
-
+    
     it('sending valid bearer string and token valid', async () => {
         const expectedMailId = "shyftplan@shyftplan.com"
         const req = {
@@ -68,7 +68,7 @@ describe('validating the middleware functions', () => {
             }
         }
         const next = sinon.spy()
-
+        
         sinon.stub(authService, 'validateAuthToken').returns(Promise.resolve({emailId:expectedMailId}));
         await middleware.authMiddleWare(req, res, next);
         sinon.assert.calledOnce(next);

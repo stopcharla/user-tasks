@@ -13,7 +13,6 @@ const getUserTasksForDay = async (emailId , date) => {
         raw:true})
     console.log('found tasks:', tasks)
     return tasks
-
 }
 
 const addTask = async (taskDetails, userEmailId) => {
@@ -37,7 +36,7 @@ const addTask = async (taskDetails, userEmailId) => {
     console.log('chasked tasks:',clashedTasks)
     console.log(clashedTasks.length)
     if(clashedTasks.length > 0){
-        throw { message:"time clashes with other task of user please check his schedule for the day" }
+        throw { message:'time clashes with other task of user please check his schedule for the day' }
     }else{
         await TaskTable.create(taskDetails)
     }

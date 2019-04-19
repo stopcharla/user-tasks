@@ -7,7 +7,7 @@ const utils = require('../utils/utils');
 const cryptoService = require('../services/cryptoService')
 
 describe('Testing the signup function in user controller', () => {
-
+    
     afterEach(function () {
         // completely restore all fakes created through the sandbox
         utils.validateObject.restore();
@@ -17,7 +17,7 @@ describe('Testing the signup function in user controller', () => {
         const req = {
             body: {
                 name: 'shyft plan',
-                emailId:"firstuser@shyftplan.com"
+                emailId:'firstuser@shyftplan.com'
             }
         }
         const res = {
@@ -32,9 +32,9 @@ describe('Testing the signup function in user controller', () => {
         }
         sinon.stub(utils, 'validateObject').returns(false);
         await userController.addUser(req, res);
-        // utils.validateObject.restore();
+        await utils.validateObject.restore();
     });
-
+    
     it('adding the user with throwing error', async () => {
         const req = {
             body: {
@@ -56,8 +56,8 @@ describe('Testing the signup function in user controller', () => {
         sinon.stub(utils, 'validateObject').returns(true);
         sinon.stub(userService, 'addUser').returns(Promise.reject({}))
         await userController.addUser(req, res);
-        // utils.validateObject.restore()
-        userService.addUser.restore()
+        await userService.addUser.restore()
+        await utils.validateObject.restore();
     });
     
     it('adding the user with correct details', async () => {
@@ -81,14 +81,14 @@ describe('Testing the signup function in user controller', () => {
         sinon.stub(utils, 'validateObject').returns(true);
         sinon.stub(userService, 'addUser').returns(Promise.resolve({}))
         await userController.addUser(req, res);
-        // utils.validateObject.restore()
-        userService.addUser.restore()
+        await userService.addUser.restore()
+        await utils.validateObject.restore();
     });
-
+    
     it('verifying the login api without providing required details', async () => {
         const req = {
             body: {
-                emailId:"firstuser@shyftplan.com"
+                emailId:'firstuser@shyftplan.com'
             }
         }
         const res = {
@@ -103,14 +103,14 @@ describe('Testing the signup function in user controller', () => {
         }
         sinon.stub(utils, 'validateObject').returns(false);
         await userController.login(req, res);
-        // utils.validateObject.restore();
+        await utils.validateObject.restore();
     });
-
+    
     it('verifying the login api with invalid credentials', async () => {
         const req = {
             body: {
-                password: "shyftplan123",
-                emailId:"firstuser@shyftplan.com"
+                password: 'shyftplan123',
+                emailId:'firstuser@shyftplan.com'
             }
         }
         const res = {
@@ -126,15 +126,15 @@ describe('Testing the signup function in user controller', () => {
         sinon.stub(utils, 'validateObject').returns(true);
         sinon.stub(userService, 'getUserInfo').returns(Promise.resolve([]))
         await userController.login(req, res);
-        // utils.validateObject.restore();
-        userService.getUserInfo.restore();
+        await utils.validateObject.restore();
+        await userService.getUserInfo.restore();
     });
-
+    
     it('verifying the login api with throwing error from get user data', async () => {
         const req = {
             body: {
-                password: "shyftplan123",
-                emailId:"firstuser@shyftplan.com"
+                password: 'shyftplan123',
+                emailId:'firstuser@shyftplan.com'
             }
         }
         const res = {
@@ -149,16 +149,16 @@ describe('Testing the signup function in user controller', () => {
         sinon.stub(utils, 'validateObject').returns(true);
         sinon.stub(userService, 'getUserInfo').returns(Promise.reject(Error('error')))
         await userController.login(req, res);
-        // utils.validateObject.restore();
-        userService.getUserInfo.restore();
+        await utils.validateObject.restore();
+        await userService.getUserInfo.restore();
     });
-
+    
     it('verifying the login api with providing required details', async () => {
-        const expectedAuthToken = "tokensample2345"
+        const expectedAuthToken = 'tokensample2345'
         const req = {
             body: {
-                password: "shyftplan123",
-                emailId:"firstuser@shyftplan.com"
+                password: 'shyftplan123',
+                emailId:'firstuser@shyftplan.com'
             }
         }
         const res = {
@@ -174,15 +174,16 @@ describe('Testing the signup function in user controller', () => {
         }
         
         sinon.stub(utils, 'validateObject').returns(true);
-        sinon.stub(userService, 'getUserInfo').returns(Promise.resolve({dataValues:{emailId:"abcd",password:"abcd123"}}))
+        sinon.stub(userService, 'getUserInfo').returns(Promise.resolve({dataValues:{emailId:'abcd',password:'abcd123'}}))
         sinon.stub(cryptoService,'compare').returns(Promise.resolve(true))
         sinon.stub(authService, 'createAuthToken').returns(Promise.resolve(expectedAuthToken))
         await userController.login(req, res);
-        userService.getUserInfo.restore();
-        cryptoService.compare.restore();
-        authService.createAuthToken.restore();
+        await userService.getUserInfo.restore();
+        await cryptoService.compare.restore();
+        await authService.createAuthToken.restore();
+        await utils.validateObject.restore();
     });
-
+    
     it('verifying the get all users api by not providing all details', async () => {
         const req = {query:{}}
         const res = {
@@ -196,13 +197,14 @@ describe('Testing the signup function in user controller', () => {
         }
         sinon.stub(utils, 'validateObject').returns(true);
         await userController.getAllUsersInfo(req, res);
+        await utils.validateObject.restore();
     });
-
+    
     it('verifying the get all users api  providing all details expected to be success', async () => {
-        const usersInfo = [{emailId:"email@emailId.com", name:"emailID"}, {emailId:"newmail@emaild.com", name: "neawmail"}];
+        const usersInfo = [{emailId:'email@emailId.com', name:'emailID'}, {emailId:'newmail@emaild.com', name: 'neawmail'}];
         const expectedResponse = {pageNumber: 0, userCount: usersInfo.length, users: usersInfo }
         const req = {
-            emailId: "mailId@mailId.com",
+            emailId: 'mailId@mailId.com',
             query:{}
         }
         const res = {
@@ -218,7 +220,8 @@ describe('Testing the signup function in user controller', () => {
         sinon.stub(utils, 'validateObject').returns(true);
         sinon.stub(userService, 'getAllUsers').returns(Promise.resolve(usersInfo))
         await userController.getAllUsersInfo(req, res);
-        userService.getAllUsers.restore();
+        await userService.getAllUsers.restore();
+        await utils.validateObject.restore();
     });
     
     

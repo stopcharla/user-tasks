@@ -1,15 +1,9 @@
 const Sequelize = require('sequelize')
 const UserModel = require('./models/users')
 const userTasksModel = require('./models/userTasks')
-const config = require('../config')
 
-
-/**
- * 
- */
-
-const sequelize = new Sequelize(config.dbConfig.dbName, config.dbConfig.username, config.dbConfig.password, {
-  host:'db',
+const sequelize = new Sequelize(process.env.MYSQL_DATABASE, process.env.MYSQL_USER, process.env.MYSQL_PASSWORD, {
+  host:process.env.DATABASE_HOST,
   dialect: 'mysql',
   port: 3306,
   pool: {
@@ -19,6 +13,7 @@ const sequelize = new Sequelize(config.dbConfig.dbName, config.dbConfig.username
     idle: 10000
   }
 })
+
 const User = UserModel(sequelize, Sequelize)
 
 sequelize.sync({ force: false }).then((res) => {

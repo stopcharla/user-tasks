@@ -1,13 +1,13 @@
 const authService = require('../services/authService')
 const config = require('../config')
 /**
- * Authentication middleware to verify the auth token provided by user
- * We verify the jwt token
- * to next step. else rejcteing the request with a 403
- * @param {*} req 
- * @param {*} res 
- * @param {*} next 
- */
+* Authentication middleware to verify the auth token provided by user
+* We verify the jwt token
+* to next step. else rejcteing the request with a 403
+* @param {*} req 
+* @param {*} res 
+* @param {*} next 
+*/
 const authMiddleWare = async (req, res, next) => {
   console.log('Auth middleware')
   const bearerToken = req.headers['authorization'];
@@ -32,5 +32,5 @@ const authMiddleWare = async (req, res, next) => {
 }
 
 module.exports = {
-    authMiddleWare
+  authMiddleWare
 }

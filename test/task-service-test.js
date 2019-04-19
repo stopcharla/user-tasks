@@ -6,9 +6,9 @@ const taskService = require('../services/taskService');
 describe('Validating the task service', () => {
 
     it('get users tasks for day', async () => {
-        const tasks = [{start:"123", end:"321", description:"abcdvfer"}]
-        const emailId = "testuser@gmail.com"
-        const date = "2011-11-03"
+        const tasks = [{start:'123', end:'321', description:'abcdvfer'}]
+        const emailId = 'testuser@gmail.com'
+        const date = '2011-11-03'
         sinon.stub(sequalize, 'getTaskTableForUser').returns({findAll: async () => {
             return Promise.resolve(tasks)
         }});
@@ -18,11 +18,11 @@ describe('Validating the task service', () => {
     });
 
     it('add task', async () => {
-        const emailId = "testuser@gmail.com"
+        const emailId = 'testuser@gmail.com'
         const taskdetails = {
-            start:"456",
-            end:"765",
-            description:"test task"
+            start:'456',
+            end:'765',
+            description:'test task'
         }
 
         sinon.stub(sequalize, 'getTaskTableForUser').returns({findAll: async () => {
@@ -36,13 +36,13 @@ describe('Validating the task service', () => {
     });
 
     it('add task', async () => {
-        const emailId = "testuser@gmail.com"
+        const emailId = 'testuser@gmail.com'
         const taskdetails = {
-            start:"456",
-            end:"765",
-            description:"test task"
+            start:'456',
+            end:'765',
+            description:'test task'
         }
-        const expectedError = { message:"time clashes with other task of user please check his schedule for the day" }
+        const expectedError = { message:'time clashes with other task of user please check his schedule for the day' }
         sinon.stub(sequalize, 'getTaskTableForUser').returns({findAll: async () => {
             return Promise.resolve([{},{}])
         },create: async() => {
